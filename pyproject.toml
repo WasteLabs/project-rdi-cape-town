@@ -1,0 +1,38 @@
+[tool.kedro]
+package_name = "project_rdi_cape_town"
+project_name = "Project RDI Cape Town"
+kedro_init_version = "0.18.10"
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/project_rdi_cape_town -ra"""
+
+[tool.poetry]
+name = "project_rdi_cape_town"
+version = "0.1.0"
+description = ""
+authors = ["ejwillemse <ejwillemse@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src/project_rdi_cape_town"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+kedro = "^0.18.10"
+kedro-datasets = "^1.4.1"
+streamlit = "^1.23.1"
+jupyter = "^1.0.0"
+nbstripout = "^0.6.1"
+awswrangler = "^2.18.0"
+fsspec = "2022.11.0"
+s3fs = "2022.11.0"
+black = "^22.12.0"
+watchdog = "^2.3.1"
+pylint = "^2.16.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

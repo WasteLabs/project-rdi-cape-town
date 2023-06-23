@@ -1,0 +1,15 @@
+version: '3'
+services:
+
+    osrm_service:
+        image: public.ecr.aws/u6u7x5n5/dev_osrm_service:1.0.0
+        environment:
+            - OSRM_PBF_URL=https://public-osm-pbf.s3.eu-west-2.amazonaws.com/data/project_ad_thailand_recycling_analysis/thailand-latest.osm.pbf
+            #- OSRM_PBF_URL=https://public-osm-pbf.s3.eu-west-2.amazonaws.com/data/project_ad_thailand_recycling_analysis/planet_98.086_9.493_3306281a.osm.pbf
+            #- OSRM_PBF_URL=https://download.geofabrik.de/asia/thailand-latest.osm.pbf
+            #- OSRM_PBF_URL=https://public-osm-pbf.s3.eu-west-2.amazonaws.com/data/project_ad_thailand_recycling_analysis/planet_99.613_12.204_59b56e36.osm.pbf
+            - OSRM_GRAPH_PROFILE_URL=https://raw.githubusercontent.com/WasteLabs/osrm_profiles/master/truck_v1.lua
+            - OSRM_MAX_MATCHING_SIZE=86400
+        ports:
+            - 5002:5000
+        restart: always
