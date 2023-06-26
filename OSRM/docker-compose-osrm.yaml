@@ -4,7 +4,7 @@ services:
     osrm_service:
         image: public.ecr.aws/u6u7x5n5/dev_osrm_service:1.0.0
         environment:
-            - OSRM_PBF_URL=https://public-osm-pbf.s3.eu-west-2.amazonaws.com/data/project-rdi-cape-town/CapeTown.osm.pbf
+            - OSRM_PBF_URL=https://public-osm-pbf.s3.eu-west-2.amazonaws.com/data/project-rdi-cape-town/CapeTown_17.838%2C-34.452_19.419%2C-32.995.osm.pbf
             - OSRM_GRAPH_PROFILE_URL=https://raw.githubusercontent.com/WasteLabs/osrm_profiles/master/truck_v1.lua
             - OSRM_MAX_MATCHING_SIZE=86400
         ports:

@@ -34,10 +34,17 @@ watchdog = "^2.3.1"
 pylint = "^2.16.2"
 tables = "^3.8.0"
 networkx = "^3.1"
-osmnx = "^1.4.0"
 matplotlib = "^3.7.1"
 cython = "^0.29.35"
 plotly = "^5.15.0"
+geopy = "^2.3.0"
+pyrosm = "^0.6.1"
+shapely = "1.8.5"
+osmnx = "<1.4.0"
+keplergl = "^0.3.2"
+python-igraph = "^0.10.4"
+pygeos = ">=0.10.0"
+
 
 [build-system]
 requires = ["poetry-core"]

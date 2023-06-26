@@ -2,3 +2,279 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+# 01 RAW
+
+osm:
+  type: project_rdi_cape_town.pipelines.extras.datasets.pyrosm_instance.PyrosmInstance
+  filepath: data/01_raw/osm/CapeTown.osm.pbf
+  layer: 01_Raw
+
+# POPULATION AND HOUSEHOLD DATA
+
+cape_town_geojson:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/01_raw/areas/CapeTown_GeoJSON_WGS84.geojson
+  layer: raw
+
+gap_zones:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/01_raw/areas/CapeTown_GAP2018v2_WGS84.geojson
+  layer: raw
+
+households:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/synthetic_populations/households.csv.gz
+  layer: raw
+  load_args:
+    compression: gzip
+
+population:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/synthetic_populations/population.csv.gz
+  layer: raw
+  load_args:
+    compression: gzip
+
+households_geojson:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/synthetic_populations/households.geojson
+  layer: intermediate
+
+waste_demand_estimate:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/demand_estimates/households.csv
+  layer: raw
+
+population_sample:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/synthetic_populations_test/households.geojson
+  layer: intermediate
+
+# ROAD NETWORK DATA
+
+# road_network_full_24645:
+#   type: kedro.extras.datasets.networkx.NetworkXDataSet
+#   filepath: data/02_intermediate/road_network/road_network_full_24645.json
+#   layer: intermediate
+
+road_network_full_24645_nodes:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_nodes/road_network_full_24645.geojson
+  layer: intermediate
+
+road_network_full_24645_edges:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges/road_network_full_24645.geojson
+  layer: intermediate
+
+road_network_full_24645_nodes_xy:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_nodes_xy/road_network_full_24645.geojson
+  layer: intermediate
+
+road_network_full_24645_edges_xy:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges_xy/road_network_full_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_nodes:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_nodes/road_network_simplified_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_edges:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges/road_network_simplified_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_nodes_xy:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_nodes_xy/road_network_simplified_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_edges_xy:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges_xy/road_network_simplified_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_edges_directed:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges_directed/road_network_simplified_24645.geojson
+  layer: intermediate
+
+road_network_simplified_24645_edges_xy_directed:
+  type: kedro.extras.datasets.geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/road_network_edges_xy_directed/road_network_simplified_24645.geojson
+  layer: intermediate
+
+# CUSTOMER ROAD-NETWORK ASSIGNMENT
+
+population_sample_network_match:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/population_sample_network_match.csv
+  layer: model_input
+
+infrastructure_sample_network_match:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/infrastructure_sample_network_match.csv
+  layer: model_input
+
+# ROUTING PARAMETERS
+
+routing_parameters:
+  type: kedro.extras.datasets.pandas.ExcelDataSet
+  filepath: data/01_raw/routing_parameters/refuse_parameters.xlsx
+  layer: raw
+  load_args:
+    engine: openpyxl
+
+# SCENARIO FILES
+
+waste_gen_scenarios:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: s3://project-rdi-cpt-public/data/01_raw/waste_generation_scenarios/cpt-20220518/
+  filename_suffix: ".csv"
+  layer: raw_input
+  # credentials: dev_s3
+
+waste_gen_scenarios_local:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/01_raw/waste_generation_scenarios/cpt/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+syn_pop_scenarios:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: s3://project-rdi-cpt-public/data/01_raw/synthetic_populations/cpt-20220601/
+  filename_suffix: ".csv"
+  layer: raw_input
+  # credentials: dev_s3
+
+syn_pop_scenarios_local/:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/01_raw/synthetic_populations/cpt/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+## Lat-lon key files
+
+syn_pop_lat_lon_ids:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/syn_pop_lat_lon_ids_20220518.csv
+  layer: intermediate
+  credentials: dev_s3
+
+lat_lon_key_network_match:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/lat_lon_key_network_match_20220518.csv
+  layer: primary
+
+## Model output
+
+resource_summary_table:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table/cpt/20220518/
+  filename_suffix: ".csv"
+  layer: model_output
+  credentials: dev_s3
+
+## Reporting
+
+resource_scenario_results:
+  type: pandas.CSVDataSet
+  filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_20220518.csv
+  layer: model_output
+  credentials: dev_s3
+
+## New scenario
+
+# SCENARIO FILES 20220601
+
+waste_gen_scenarios_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: s3://project-rdi-cpt-public/data/01_raw/waste_generation_scenarios/cpt-20220601/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+waste_gen_scenarios_local_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/01_raw/waste_generation_scenarios/cpt-20220601/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+syn_pop_scenarios_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: s3://project-rdi-cpt-public/data/01_raw/synthetic_populations/cpt-20220601/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+syn_pop_scenarios_local_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/01_raw/synthetic_populations/cpt-20220601/
+  filename_suffix: ".csv"
+  layer: raw_input
+  credentials: dev_s3
+
+## Lat-lon key files
+
+syn_pop_lat_lon_ids_20220601:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/syn_pop_lat_lon_ids_20220601.csv
+  layer: intermediate
+  credentials: dev_s3
+
+lat_lon_key_network_match_20220601:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/lat_lon_key_network_match_20220601.csv
+  layer: primary
+
+## Model output
+
+resource_summary_table_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  credentials: dev_s3
+
+## Reporting
+
+resource_scenario_results_20220601:
+  type: pandas.CSVDataSet
+  filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_20220601.csv
+  layer: model_output
+  credentials: dev_s3
+
+## Model output
+
+resource_summary_table_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+  credentials: dev_s3
+
+## Reporting
+
+resource_scenario_results_20220601_decentral:
+  type: pandas.CSVDataSet
+  filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_20220601_decentral.csv
+  layer: model_output
+  credentials: dev_s3

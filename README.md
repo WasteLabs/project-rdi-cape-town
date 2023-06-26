@@ -23,6 +23,12 @@ This requires poetry:
 poetry install
 ```
 
+And to activate a local poetry shell, do:
+
+```
+source $(poetry env info --path)/bin/activate
+```
+
 ## How to run your Kedro pipeline
 
 You can run your Kedro project with:
