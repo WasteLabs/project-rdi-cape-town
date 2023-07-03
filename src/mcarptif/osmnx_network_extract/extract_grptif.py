@@ -11,14 +11,15 @@ The shortest-path matrix retrieval and the actual shortest path geometry will
 be affected.
 """
 import logging
-import pandas as pd
-import numpy as np
-import tables as tb
-from mcarptif.osmnx_network_extract.create_instance import create_arc_id
-from mcarptif.converter.shortest_path import sp_full
-from mcarptif.osmnx_network_extract.network_code import create_gdf, create_latlon_gdf
 
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import tables as tb
+
+from mcarptif.converter.shortest_path import sp_full
+from mcarptif.osmnx_network_extract.create_instance import create_arc_id
+from mcarptif.osmnx_network_extract.network_code import create_gdf, create_latlon_gdf
 
 
 class NetworkExtract:
@@ -399,13 +400,13 @@ class NetworkExtract:
             raise ValueError
         if depot["arc_index_inv"][0] != -1:
             logging.error("Depot cannot have inverse arc.")
-            #raise ValueError
+            # raise ValueError
         if ifs.duplicated(["arc_index"]).any():
             logging.error("Duplicate offload facilities.")
             raise ValueError
         if (ifs["arc_index_inv"] != -1).any():
             logging.error("Offload cannot have inverse arc.")
-            raise ValueError
+            # raise ValueError
         if arcs.duplicated(["arc_index"]).any():
             logging.error("Duplicate required arcs.")
             raise ValueError
@@ -790,7 +791,6 @@ class NetworkExtract:
         self.df_solution = df_solution.copy()
 
     def add_hk_solution(self, df_solution, intermediate_if, extend=True, order=True):
-
         if extend:
             self.extend_prop_info()
         df_solution = df_solution.copy()
@@ -1004,7 +1004,6 @@ class NetworkExtract:
         linewidth_req=3,
         linewidth_req_cust=1,
     ):
-
         if figsize is None:
             figsize = (40, 40)
 
@@ -1386,7 +1385,6 @@ class NetworkExtract:
         df_arc_producer = df_arc_producer.dropna(subset=["category"])
 
         if not bc:
-
             df_arc_producer = df_arc_producer[
                 [
                     "Vehicle",
@@ -1394,11 +1392,11 @@ class NetworkExtract:
                     "Collection day",
                     "Service time window",
                     "category",
-                    #"block_number",
-                    #"street_name",
+                    # "block_number",
+                    # "street_name",
                     "Postal Code",
-                    #"description / building",
-                    #"planning_zone",
+                    # "description / building",
+                    # "planning_zone",
                     "demand",
                     "total units",
                     "total_people",
@@ -1433,7 +1431,6 @@ class NetworkExtract:
         )
 
         if not bc:
-
             route_kpi_add = route_kpi_add.rename(
                 columns={"BLK_NO": "block_number", "ROAD_NAME": "street_name"}
             )
@@ -1448,15 +1445,14 @@ class NetworkExtract:
                     "Collection day",
                     "Service time window",
                     "category",
-                    #"block_number",
-                    #"street_name",
+                    # "block_number",
+                    # "street_name",
                     "Postal Code",
                     "index_temp",
                 ]
             ]
 
         else:
-
             route_kpi_add = route_kpi_add.rename(
                 columns={"BLK_NO": "BC Blk No", "ROAD_NAME": "Street Name"}
             )
@@ -1499,11 +1495,11 @@ class NetworkExtract:
                 "Collection day",
                 "Service time window",
                 "Producer Category",
-                #"Block number",
-                #"Street name",
+                # "Block number",
+                # "Street name",
                 "Postal Code",
-                #"Description / Building",
-                #"Planning zone",
+                # "Description / Building",
+                # "Planning zone",
                 "Demand (kg)",
                 "Total units",
                 "Estimated residents",

@@ -243,12 +243,82 @@ lat_lon_key_network_match_20220601:
   filepath: data/03_primary/lat_lon_key_network_match_20220601.csv
   layer: primary
 
+lat_lon_key_network_match_20220601_residential_matches_only:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/lat_lon_key_network_match_20220601_residential_matches_only.csv
+  layer: primary
+
+lat_lon_key_network_match_20220601_residential_streets_only:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/lat_lon_key_network_match_20220601_residential_streets_only.csv
+  layer: primary
+
+lat_lon_key_network_match_20220601_all_streets:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/lat_lon_key_network_match_20220601_all_streets.csv
+  layer: primary
+
 ## Model output
 
 resource_summary_table_20220601:
   type: PartitionedDataSet
   dataset: pandas.CSVDataSet
   path: data/07_model_output/resource_summary_table/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_fixed_speed_residential_only_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_fixed_speed_residential_only_20220601/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_fixed_speed_residential_only_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_fixed_speed_residential_only_20220601/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+
+resource_summary_table_fixed_speed_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_fixed_speed_20220601/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_fixed_speed_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_fixed_speed_20220601/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_arcs_only_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_arcs_only_20220601/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_arcs_only_fixed_speed_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_arcs_only_fixed_speed_20220601/cpt/20220601/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_all_arcs_only_20220601:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_all_arcs_only_20220601/cpt/20220601/
   filename_suffix: ".csv"
   layer: model_output
   credentials: dev_s3
@@ -259,7 +329,13 @@ resource_scenario_results_20220601:
   type: pandas.CSVDataSet
   filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_20220601.csv
   layer: model_output
-  credentials: dev_s3
+  #credentials: dev_s3
+
+resource_scenario_result_arcs_only_20220601:
+  type: pandas.CSVDataSet
+  filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_result_arcs_only_20220601.csv
+  layer: model_output
+  #credentials: dev_s3
 
 ## Model output
 
@@ -269,7 +345,31 @@ resource_summary_table_20220601_decentral:
   path: data/07_model_output/resource_summary_table/cpt/20220601_decentral/
   filename_suffix: ".csv"
   layer: model_output
-  credentials: dev_s3
+  #credentials: dev_s3
+
+resource_summary_table_arcs_only_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_arcs_only_20220601/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_arcs_only_fixed_speed_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_arcs_only_fixed_speed_20220601/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
+
+resource_summary_table_all_arcs_only_20220601_decentral:
+  type: PartitionedDataSet
+  dataset: pandas.CSVDataSet
+  path: data/07_model_output/resource_summary_table_all_arcs_only_20220601/cpt/20220601_decentral/
+  filename_suffix: ".csv"
+  layer: model_output
+  #credentials: dev_s3
 
 ## Reporting
 
@@ -278,3 +378,9 @@ resource_scenario_results_20220601_decentral:
   filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_20220601_decentral.csv
   layer: model_output
   credentials: dev_s3
+
+resource_scenario_results_20220601_decentral_arcs_only:
+  type: pandas.CSVDataSet
+  filepath: s3://project-rdi-cpt-public/data/08_reporting/resource_scenario_results_arcs_only_20220601_decentral.csv
+  layer: model_output
+  #credentials: dev_s3
